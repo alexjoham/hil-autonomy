@@ -34,12 +34,22 @@
         "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -g",
         "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined"
       }
+    },
+    {
+      "name": "teensy",
+      "displayName": "Teensy",
+      "inherits": "host-base",
+      "toolchainFile": "${sourceDir}/cmake/teensy41.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
     }
   ],
   "buildPresets": [
     { "name": "debug", "configurePreset": "debug" },
     { "name": "release", "configurePreset": "release" },
-    { "name": "asan", "configurePreset": "asan" }
+    { "name": "asan", "configurePreset": "asan" },
+    { "name": "teensy", "configurePreset": "teensy"}
   ],
   "testPresets": [
     {
@@ -84,6 +94,13 @@
         { "type": "configure", "name": "asan" },
         { "type": "build", "name": "asan" },
         { "type": "test", "name": "asan" }
+      ]
+    },
+    {
+      "name": "teensy",
+      "steps": [
+        { "type": "configure", "name": "teensy" },
+        { "type": "build", "name": "teensy" }
       ]
     }
   ]
