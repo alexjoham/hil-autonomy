@@ -20,4 +20,9 @@ if(NOT CMAKE_CROSSCOMPILING)
     include(GoogleTest)
 endif()
 
+if(CMAKE_CROSSCOMPILING)
+    enable_language(C ASM)
+    add_subdirectory(third_party)
+endif()
+
 add_subdirectory(core)
