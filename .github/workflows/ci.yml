@@ -30,3 +30,27 @@ jobs:
 
       - name: Configure, build and test
         run: cmake --workflow --preset ${{ matrix.preset }}
+
+  teensy:
+    name: Teensy 4.1 firmware
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install Arm GNU Toolchain 11.3.rel1
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/arm-gcc.tar.xz" \
+            https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz
+          mkdir -p "$RUNNER_TEMP/arm-gcc"
+          tar xf "$RUNNER_TEMP/arm-gcc.tar.xz" -C "$RUNNER_TEMP/arm-gcc" --strip-components=1
+          echo "ARM_GCC_DIR=$RUNNER_TEMP/arm-gcc" >> "$GITHUB_ENV"
+
+      - name: Report toolchain version
+        run: $ARM_GCC_DIR/bin/arm-none-eabi-gcc --version
+
+      - name: Build firmware
+        run: cmake --workflow --preset teensy

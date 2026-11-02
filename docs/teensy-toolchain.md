@@ -9,8 +9,14 @@ How the firmware for the Teensy 4.1 is built, without PlatformIO or the Arduino 
 
    ```
    mkdir -p ~/toolchains && cd ~/toolchains
+
+   # macOS (Intel build, runs through Rosetta 2 on Apple silicon)
    curl -LO https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-darwin-x86_64-arm-none-eabi.tar.xz
-   tar xf arm-gnu-toolchain-11.3.rel1-darwin-x86_64-arm-none-eabi.tar.xz
+
+   # Linux x86_64 (also used by CI)
+   curl -LO https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz
+
+   tar xf arm-gnu-toolchain-11.3.rel1-*.tar.xz
    ```
 
    On macOS, download with `curl`, not the browser. Browser downloads are
