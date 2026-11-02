@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+
+jobs:
+  build-and-test:
+    env:
+      CXX: ${{ matrix.cxx }}
+    name: ${{ matrix.cxx }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        cxx: [g++, clang++]
+        preset: [debug, release, asan]
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Report toolchain versions
+        run: |
+          ${{ matrix.cxx }} --version
+          cmake --version
+
+      - name: ${{ matrix.cxx }} (${{ matrix.preset }})
+        run: cmake --workflow --preset ${{ matrix.preset }}
+
