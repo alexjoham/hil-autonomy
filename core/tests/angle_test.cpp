@@ -7,15 +7,19 @@
 using namespace std::numbers;
 
 TEST(AngleTest, ZeroRadiansRemainZero) {
-    ASSERT_EQ(hil::wrap_angle(0), 0);
+    EXPECT_EQ(hil::wrap_angle(0), 0);
+}
+
+TEST(AngleTest, PositiveThreePiWrapsToNegativePi) {
+    EXPECT_EQ(hil::wrap_angle(3 * pi), -pi);
 }
 
 TEST(AngleTest, PositiveThreeHalfPiWrapsToNegativeHalfPi) {
-    ASSERT_EQ(hil::wrap_angle(3 * pi / 2), -pi/2);
+    EXPECT_EQ(hil::wrap_angle(3 * pi / 2), -pi/2);
 }
 
 TEST(AngleTest, NegativeThreeHalfPiWrapsToPositiveHalfPi) {
-    ASSERT_EQ(hil::wrap_angle(-3 * pi / 2), pi/2);
+    EXPECT_EQ(hil::wrap_angle(-3 * pi / 2), pi/2);
 }
 
 TEST(AngleTest, SevenRadiansWrapsByOneFullTurn) {
@@ -27,13 +31,21 @@ TEST(AngleTest, FullTurnsPlusOffsetPreserveOffset) {
 }
 
 TEST(AngleTest, PositivePiWrapsToNegativePi) {
-    ASSERT_EQ(hil::wrap_angle(pi), -pi);
+    EXPECT_EQ(hil::wrap_angle(pi), -pi);
+}
+
+TEST(AngleTest, NegativePiWrapsToNegativePi) {
+    EXPECT_EQ(hil::wrap_angle(-pi), -pi);
+}
+
+TEST(AngleTest, LargestDoubleBelowPiReturnsUnchanged) {
+    EXPECT_EQ(hil::wrap_angle(std::nextafter(pi, 0.0)), std::nextafter(pi, 0.0));
 }
 
 TEST(AngleTest, NaNReturnsNaN) {
-    ASSERT_TRUE(std::isnan(hil::wrap_angle(NAN)));
+    EXPECT_TRUE(std::isnan(hil::wrap_angle(std::numeric_limits<double>::quiet_NaN())));
 }
 
 TEST(AngleTest, InfinityReturnsNaN) {
-    ASSERT_TRUE(std::isnan(hil::wrap_angle(std::numeric_limits<double>::infinity())));
+    EXPECT_TRUE(std::isnan(hil::wrap_angle(std::numeric_limits<double>::infinity())));
 }
