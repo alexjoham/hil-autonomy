@@ -11,7 +11,7 @@ jobs:
   build-and-test:
     env:
       CXX: ${{ matrix.cxx }}
-    name: ${{ matrix.cxx }}
+    name: ${{ matrix.cxx }} (${{ matrix.preset }})
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
@@ -28,6 +28,5 @@ jobs:
           ${{ matrix.cxx }} --version
           cmake --version
 
-      - name: ${{ matrix.cxx }} (${{ matrix.preset }})
+      - name: Configure, build and test
         run: cmake --workflow --preset ${{ matrix.preset }}
-
