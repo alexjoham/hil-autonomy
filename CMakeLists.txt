@@ -27,4 +27,6 @@ endif()
 
 add_subdirectory(core)
 
-add_subdirectory(firmware)
+if(CMAKE_CROSSCOMPILING)
+    add_subdirectory(firmware)
+endif()

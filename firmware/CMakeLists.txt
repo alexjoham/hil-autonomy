@@ -1,6 +1,6 @@
 add_executable(firmware src/main.cpp)
 set_target_properties(firmware PROPERTIES SUFFIX ".elf")
-target_link_libraries(firmware PRIVATE teensy_core hil_warnings)
+target_link_libraries(firmware PRIVATE teensy::core hil_warnings)
 target_link_options(firmware PRIVATE -Wl,--gc-sections,--relax)
 
 add_custom_command(TARGET firmware POST_BUILD

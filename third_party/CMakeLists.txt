@@ -14,3 +14,5 @@ target_compile_options(teensy_core PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-fpermissive -Wno-error=narrowing>)
 
 target_link_options(teensy_core INTERFACE -T${TEENSY4_DIR}/imxrt1062_t41.ld)
+
+add_library(teensy::core ALIAS teensy_core)
