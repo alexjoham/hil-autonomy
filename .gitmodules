@@ -1,0 +1,3 @@
+[submodule "third_party/teensy-cores"]
+	path = third_party/teensy-cores
+	url = https://github.com/PaulStoffregen/cores.git
