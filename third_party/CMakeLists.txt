@@ -12,3 +12,5 @@ target_compile_definitions(teensy_core PUBLIC
 set_target_properties(teensy_core PROPERTIES CXX_STANDARD 17 CXX_EXTENSIONS ON)
 target_compile_options(teensy_core PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-fpermissive -Wno-error=narrowing>)
+
+target_link_options(teensy_core INTERFACE -T${TEENSY4_DIR}/imxrt1062_t41.ld)

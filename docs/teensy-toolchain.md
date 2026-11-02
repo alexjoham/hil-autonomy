@@ -80,3 +80,23 @@ Disassembly of a built library, to confirm it contains Cortex-M7 code:
 ```
 $ARM_GCC_DIR/bin/arm-none-eabi-objdump -d build/teensy/core/libhil_core.a
 ```
+
+## Flash
+
+Install the command-line loader once:
+
+```
+brew install teensy_loader_cli
+```
+
+Flash the firmware:
+
+```
+teensy_loader_cli --mcu=TEENSY41 -w -v build/teensy/firmware/firmware.hex
+```
+
+When it prints "Waiting for Teensy device", press the button on the Teensy.
+
+If the small red LED blinks after flashing instead of the firmware starting,
+the first attempt failed. This is a known quirk with newer Teensy
+bootloaders: press the button and flash again.

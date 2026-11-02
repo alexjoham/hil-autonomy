@@ -16,3 +16,4 @@ set(CMAKE_C_FLAGS_INIT   "${TEENSY_MACHINE_FLAGS} -ffunction-sections -fdata-sec
 set(CMAKE_CXX_FLAGS_INIT "${TEENSY_MACHINE_FLAGS} -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics")
 set(CMAKE_ASM_FLAGS_INIT "${TEENSY_MACHINE_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS_INIT "${TEENSY_MACHINE_FLAGS}")
+set(ARM_SIZE "$ENV{ARM_GCC_DIR}/bin/arm-none-eabi-size")
