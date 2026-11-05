@@ -1,4 +1,4 @@
-add_library(hil_core STATIC src/angle.cpp)
+add_library(hil_core STATIC src/angle.cpp src/vehicle.cpp)
 add_library(hil::core ALIAS hil_core)
 
 target_include_directories(hil_core PUBLIC include)
