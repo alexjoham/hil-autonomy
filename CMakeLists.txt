@@ -30,3 +30,7 @@ add_subdirectory(core)
 if(CMAKE_CROSSCOMPILING)
     add_subdirectory(firmware)
 endif()
+
+if(NOT CMAKE_CROSSCOMPILING)
+    add_subdirectory(sim)
+endif()
