@@ -1,4 +1,5 @@
 #include "hil/vehicle.hpp"
+#include <cmath>
 #include <format>
 #include <iostream>
 #include <string>
@@ -11,24 +12,23 @@ int main() {
     const double dt = 0.01;
     const double duration = 20;
 
-    VehicleParams params{.wheelbase = 0.25, .max_steering = 0.5};
+    const VehicleParams params{.wheelbase = 0.25, .max_steering = 0.5};
 
-    VehicleInput vehicleInput{.steering = steering};
+    const VehicleInput vehicleInput{.steering = steering};
 
-    hil::VehicleState state{.speed = speed};
+    VehicleState state{.speed = speed};
 
-    std::string header = std::format("t,x,y,heading,speed\n");
+    const std::string header = std::format("t,x,y,heading,speed\n");
 
     std::cout << header;
 
-    double steps = duration/dt;
+    double steps = static_cast<int>(std::lround(duration/dt));
     for (int i = 0; i < steps; i++) {
         double t = i * dt;
-        if (t >= 20) break;
-
-        std::string step = std::format("{},{},{},{},{}\n", t, state.x, state.y, state.heading, state.speed);
+        const std::string step = std::format("{},{},{},{},{}\n", t, state.x, state.y, state.heading, state.speed);
         std::cout << step;
+        if (t >= duration) break;
 
-        state = hil::step_euler(state, vehicleInput, params, dt);
+        state = step_euler(state, vehicleInput, params, dt);
     }
 }
