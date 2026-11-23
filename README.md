@@ -16,13 +16,13 @@ cmake --workflow --preset debug
 
 To run the simulation call:
 ```
-./build/debug/sim/hil_sim > run.csv
+./build/debug/sim/hil_sim track.csv > run.csv
 ```
 
 This then creates a file `run.csv`. To plot the simulation run:
 
 ```
-python3 tools/plot_run.py run.csv run.png
+python3 tools/plot_run.py run.csv track.csv run.png
 ```
 
 This then creates the file `run.png` that visualizes the run in a png.
